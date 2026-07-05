@@ -1,0 +1,197 @@
+/* 
+   RK Health Responsiveness Styling 
+   Handles sidebar collapses, mobile overlays, grids wrapping, and print overrides.
+*/
+
+/* Extra Large Screens */
+@media (min-width: 1400px) {
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Medium Screens - Tablets / Small Laptops */
+@media (max-width: 1024px) {
+    :root {
+        --sidebar-width: 220px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .settings-form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .search-bar-wrapper {
+        width: 240px;
+    }
+    
+    .search-bar-wrapper input:focus {
+        width: 280px;
+    }
+}
+
+/* Mobile Screens */
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 260px; /* Drawer size on mobile */
+    }
+    
+    /* Sidebar becomes a overlay drawer on mobile */
+    .sidebar {
+        left: calc(-1 * var(--sidebar-width));
+        transition: left var(--transition-normal);
+        height: 100vh;
+        box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+    }
+    
+    .sidebar.mobile-open {
+        left: 0;
+    }
+    
+    /* Main content full width */
+    .main-content {
+        margin-left: 0 !important;
+    }
+    
+    .sidebar.collapsed + .main-content {
+        margin-left: 0 !important;
+    }
+    
+    .navbar {
+        padding: 0 16px;
+    }
+    
+    .navbar-left {
+        gap: 12px;
+    }
+    
+    .search-bar-wrapper {
+        display: none; /* Hide global search on mobile header to save space */
+    }
+    
+    .user-info-text {
+        display: none; /* Only avatar on mobile header */
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    
+    .content-body {
+        padding: 16px;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .page-header-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .table-header-filters {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .table-search-box {
+        width: 100%;
+    }
+    
+    .table-filters {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .table-filters select {
+        flex-grow: 1;
+    }
+    
+    /* Modals resize */
+    .modal-content {
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .modal-body {
+        overflow-y: auto;
+    }
+    
+    .modal-footer {
+        flex-wrap: wrap;
+    }
+    
+    .modal-footer button {
+        flex-grow: 1;
+    }
+
+    .ai-summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tiny Mobile Devices */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 20px;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
+/* Print Overrides for Health Reports */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .sidebar, .navbar, .toast-container, .modal-overlay, .page-header-actions, .pagination-controls, .btn {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .content-body {
+        padding: 0 !important;
+    }
+    
+    .page-section {
+        display: none !important;
+    }
+    
+    .page-section#reportsSection {
+        display: block !important;
+    }
+    
+    .report-paper {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        font-size: 11pt !important;
+    }
+}
